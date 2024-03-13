@@ -2,10 +2,13 @@ name: 'Slack Notify'
 description: 'This action will send a notification to Slack'
 author: 'rtCamp'
 runs:
-    using: 'docker'
-    image: 'Dockerfile'
-    env:
-      GITHUB_RUN: "${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
+    using: 'composite'
+    steps:
+      - name: "Slack Notification (Unformatted)"
+        if: env.SLACKIFY_MARKDOWN != 'true'
+        uses: "Dockerfile"
+        env:
+          GITHUB_RUN: "${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
 branding:
   icon: 'bell'
   color: 'yellow'
