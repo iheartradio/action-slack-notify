@@ -17,6 +17,8 @@ RUN go build -a -installsuffix cgo -ldflags '-w  -extldflags "-static"' -o /go/b
 # alpine:latest as of 2024-03-11
 FROM public.aws.ecr/docker/library/alpine@sha256:6457d53fb065d6f250e1504b9bc42d5b6c65941d57532c072d929dd0628977d0
 
+ENV GITHUB_RUN ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
+
 COPY --from=builder /go/bin/slack-notify /usr/bin/slack-notify
 
 ENV VAULT_VERSION 1.0.2
