@@ -5,7 +5,7 @@ runs:
     using: 'composite'
     steps:
       - name: "Slack Notification (Unformatted)"
-        if: env.SLACKIFY_MARKDOWN != 'true'
+        working-directory: ${{ github.workspace }}
         uses: "./"
         env:
           GITHUB_RUN: "${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
