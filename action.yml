@@ -6,7 +6,7 @@ runs:
     steps:
       - name: "Slack Notification (Unformatted)"
         if: env.SLACKIFY_MARKDOWN != 'true'
-        uses: "Dockerfile"
+        uses: "./"
         env:
           GITHUB_RUN: "${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
 branding:
