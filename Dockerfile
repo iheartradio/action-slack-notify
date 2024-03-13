@@ -1,4 +1,4 @@
-FROM public.aws.ecr/docker/library/golang:1.22-alpine3.19 AS builder
+FROM public.ecr.aws/docker/library/golang:1.22-alpine AS builder
 
 LABEL "com.github.actions.icon"="bell"
 LABEL "com.github.actions.color"="yellow"
@@ -15,7 +15,7 @@ ENV GOOS linux
 RUN go build -a -installsuffix cgo -ldflags '-w  -extldflags "-static"' -o /go/bin/slack-notify main.go
 
 # alpine:latest as of 2024-03-11
-FROM public.aws.ecr/docker/library/alpine
+FROM public.ecr.aws/docker/library/alpine:latest
 
 ENV GITHUB_RUN ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
 
